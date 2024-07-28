@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MessageController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,7 +33,12 @@ Route::middleware('auth')->group(function () {
 
     Route::put('/product/{product}/update', [ProductController::class,'update'])->name('product.update');
     Route::delete('/product/{product}/delete', [ProductController::class,'delete'])->name('product.delete');
- 
+
+    Route::get('/message', [MessageController::class, 'index'])->name('message.index');
+    Route::get('/message/users', [MessageController::class, 'users'])->name('message.users');
+    Route::get('/message/{user}/', [MessageController::class, 'chat'])->name('message.chat');
+    Route::post('/message/{user}/chat', [MessageController::class, 'store'])->name('message.store');
+    Route::get('/message/{user}/display', [MessageController::class, 'display'])->name('message.display');
     
 });
 
